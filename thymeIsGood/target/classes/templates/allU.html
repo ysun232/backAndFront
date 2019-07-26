@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<div>
+    <h2>Users</h2>
+    <table>
+        <thead>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${page.content}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.today}"></td>
+            <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+</div>
+    <div>
+        <td>
+            <span th:if="${page.hasPrevious()}">
+                <a th:href="@{/AllUsers(page= 0, size=${page.size})}">First Page</a>
+            </span>
+            <span th:if="${page.hasPrevious()}">
+                <a th:href="@{/AllUsers(page=${page.number -1}, size=${page.size})}">Previous Page</a>
+            </span>
+            <span th:if="${page.hasNext()}">
+                <a th:href="@{/AllUsers(page=${page.number +1}, size=${page.size})}">Next Page</a>
+            </span>
+            <span th:if="${page.hasNext()}">
+                <a th:href="@{/AllUsers(page=${page.totalPages -1}, size=${page.size})}">Last Page</a>
+            </span>
+        </td>
+    </div>
+
+<p><a href="/signup">Add a new user</a></p>
+<p><a href="/">Return to main page</a></p>
+    </body>
+</html>
